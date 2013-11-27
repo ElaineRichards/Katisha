@@ -1,47 +1,24 @@
 <project name="Send Stuff To My Host" default="getinfo" >
 <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
 
+<!-- build.properties is never checked into git. It has information not for general consumption.
+     So, if you copy this file, you'll need to make your own build.properties file with all the missing things.
+ -->	
+		
 <property file="build.properties"/>
 
 <target name="getinfo">
 	<echo>This version of ant is ${ant.version}</echo>
-	<echo>
-	These are all the default values:
-		${ant.file}
-		${ant.version}
-		${basedir}
-		${ant.java.version}
-		${ant.project.name}
-		${ant.project.default-target}
-		${ant.project.invoked-targets}
-		${ant.core.lib}
-		${ant.home}
-		${ant.library.dir}
-		${localhome}
-		${desthost}
-		${destdir}
-	These are values I defined in build.properties:
-		localhome = ${localhome}
-		desthost = ${desthost}
-		destdir =  ${destdir}
-		homedir = ${homedir}
-		passtwo=${passtwo}
-	</echo>
 </target>
-<!--
-In my local directory:
-index.html should be removed at the start.
-source_index.html should NOT go up on the page. There is a field that is $DATE
-which should be updated to the current date. The result of that will go into
-index.html replacing it.
-my-host/my-host/index.html
-my-host/my-host/source_index.html
-
--->
 
 <property name="my-host-staging" value="${localdirectory}/${my-host-uc}.staging" />
 <property name="my-host-dev" value="${localdirectory}/${my-host-uc}.dev" />
 <property name="my-host-bundle" value="${localdirectory}/${my-host-uc}.bundle" />
+	
+<!-- There are three directories. One is "dev". That's where I do my work and check stuff in and out of Git.
+     Then, there is staging. I put the finished work product in there. I can view it on my localhost.
+     Lastly is bundle, which is where I put the bundled file before sending it to my ISP.
+-->
 	
 <target name="re-init-staging">
 	<delete dir="${my-host-staging}" failonerror="false" />
@@ -58,6 +35,9 @@ my-host/my-host/source_index.html
 	<property name="today" value="${TODAY}"/>
 	<copy file="${my-host-dev}/Templates/index.html" tofile="${my-host-staging}/index.html"/>
 	<replace file="${my-host-staging}/index.html" token="::TODAY::" value="${TODAY}" />
+	<replace file="${my-host-staging}/index.html" token="::my-host-uc::" value="${my-host-uc}" />
+	<replace file="${my-host-staging}/index.html" token="::my-host::" value="${my-host}" />
+	
 </target>
 	
 <target name="bundle" depends="re-init-staging,updatehome,re-init-bundle" >
