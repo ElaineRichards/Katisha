@@ -1,4 +1,13 @@
 #!/usr/bin/env python
+#
+# The inputs for this app are stored in a file called stocknumberfile, which is not uploaded into Git. I have my copy
+# locally and no one needs to know my holdings but me.
+#
+# The format for stocknumberfile is that each line has the stock symbol, a colon, and the number of shares.
+# ex.
+#    goog:10
+#    msft:20
+
 import urllib 
 import re
 #import sys 
