@@ -45,21 +45,22 @@
 	<replace file="${my-host-staging}/index.html" token="::TODAY::" value="${TODAY}" />
 	<replace file="${my-host-staging}/index.html" token="::my-host-uc::" value="${my-host-uc}" />
 	<replace file="${my-host-staging}/index.html" token="::my-host::" value="${my-host}" />
+	<copy file="${my-host-dev}/moar.html" tofile="${my-host-staging}/moar.html"/>
 	
 </target>
 	
 <target name="bundle" depends="re-init-staging,updatehome,re-init-bundle" >
 	<tar destfile="${my-host-bundle}/bundle.tar" >
 		<tarfileset dir="${my-host-staging}" >
-		<include name="index.html"/>
-			</tarfileset>
+		<include name="*.html"/>
+		<include name="moar.html"/>
+		</tarfileset>
 	</tar>
 </target>
 	
-	
 <target name="deploy" depends="bundle">
 	<scp password="${password}" file="${my-host-bundle}/bundle.tar" todir="${my-host-userid}@${desthost}:bundle.tar"/>
-	<sshexec host="${desthost}" username="${my-host-userid}" password="${password}" command="tar xf ~/bundle.tar;cp ~/index.html ${my-host-sitepath}/${my-host-userid}/${my-host}.com/index.html"/>
+	<sshexec host="${desthost}" username="${my-host-userid}" password="${password}" command="mv bundle.tar web-staging/bundle.tar;cd web-staging;tar xf bundle.tar;cd ..;cp web-staging/* ${my-host-sitepath}/${my-host-userid}/${my-host}.com"/>
 </target>
 </project>
 
