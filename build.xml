@@ -3,6 +3,14 @@
 
 <!-- build.properties is never checked into git. It has information not for general consumption.
      So, if you copy this file, you'll need to make your own build.properties file with all the missing things.
+     "x=y", one per line is the format.
+     
+     desthost: The ISP
+     localdirectory: That's the directory that this file is in on my home computer
+     my-host: My domain name
+     my-host-uc: The domain name uppercased
+     my-host-userid: My login name on "desthost"
+     my-host-sitepath: That's a part of the pathname for my web content.
  -->	
 		
 <property file="build.properties"/>
@@ -11,14 +19,14 @@
 	<echo>This version of ant is ${ant.version}</echo>
 </target>
 
+<!-- There are three directories. One is "dev". That's where I do my work and check stuff in and out of Git.
+	     Then, there is staging. I put the finished work product in there. I can view it on my localhost.
+	     Lastly is bundle, which is where I put the bundled file before sending it to my ISP.
+-->
+	
 <property name="my-host-staging" value="${localdirectory}/${my-host-uc}.staging" />
 <property name="my-host-dev" value="${localdirectory}/${my-host-uc}.dev" />
 <property name="my-host-bundle" value="${localdirectory}/${my-host-uc}.bundle" />
-	
-<!-- There are three directories. One is "dev". That's where I do my work and check stuff in and out of Git.
-     Then, there is staging. I put the finished work product in there. I can view it on my localhost.
-     Lastly is bundle, which is where I put the bundled file before sending it to my ISP.
--->
 	
 <target name="re-init-staging">
 	<delete dir="${my-host-staging}" failonerror="false" />
