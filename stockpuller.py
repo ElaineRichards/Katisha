@@ -33,9 +33,9 @@ for line in stockfile:
     total = 0
     [thestock, n] = re.split(":",line)
     try:
-         numberofshares = int(n)
+         numberofshares = float(n)
     except:
-         print "could not convert n to int",
+         print "could not convert n to float",
          print n
     
     if (thestock):
@@ -44,7 +44,7 @@ for line in stockfile:
         except:
             print "Couldn't find price for %s" % thestock
     try:
-        total = float(numberofshares) * float(value)
+        total = numberofshares * float(value)
     except:
         print "Can't multiply "
     try:
