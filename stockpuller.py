@@ -48,7 +48,7 @@ for line in stockfile:
     except:
         print "Can't multiply "
     try:
-        print "%s: %f : %d : %f "% (thestock,value,numberofshares,total)
+        print "%s: %.2f : %d : %.2f "% (thestock,value,numberofshares,total)
     except:
          print "could not print fussy line"
     runningtotal = runningtotal + total
