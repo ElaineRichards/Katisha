@@ -7,14 +7,17 @@
 # ex.
 #    goog:10
 #    msft:20
-
+#import displaywrapper
+import sys
+sys.path.append(".")
+import displaywrapper
 import urllib 
 import re
 #import sys 
 import fileinput
 
 
-def get_quote(symbol):
+def get_quote_from_yahoo(symbol):
     returnvalue = 0
     url = "http://finance.yahoo.com/q?s=" + symbol + "&ql=1" 
     htmlfile = urllib.urlopen(url)
@@ -35,6 +38,7 @@ def get_quote(symbol):
 
 runningtotal = 0
 
+outputline = ""
 stockfile = open('stocknumberfile','r')
 for line in stockfile:
     numberofshares = 0
@@ -44,24 +48,26 @@ for line in stockfile:
     try:
          numberofshares = float(n)
     except:
-         print "could not convert n to float",
-         print n
+         outputline +=  "could not convert n to float",
+         outputline += str(n)
     
     if (thestock):
         try:
-            value = get_quote(thestock) 
+            value = get_quote_from_yahoo(thestock) 
         except:
-            print "Couldn't find price for %s" % thestock
+            outputline += "Couldn't find price for %s" % thestock
     try:
         total = numberofshares * float(value)
     except:
-        print "Can't multiply "
+        outputline += "Can't multiply "
     try:
-        print "%s: %.2f : %d : %.2f "% (thestock,value,numberofshares,total)
+        outputline += "%s: %.2f : %d : %.2f "% (thestock,value,numberofshares,total)
     except:
-         print "could not print fussy line"
+         outputline += "could not print fussy line"
     runningtotal = runningtotal + total
 
 stockfile.close
+outputline += "Complete total is : %d" % runningtotal
 
-print "Complete total is : %d" % runningtotal
+displaywrapper.wrapoutput( outputline )
+                          
