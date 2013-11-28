@@ -53,7 +53,6 @@
 	<tar destfile="${my-host-bundle}/bundle.tar" >
 		<tarfileset dir="${my-host-staging}" >
 		<include name="*.html"/>
-		<include name="moar.html"/>
 		</tarfileset>
 	</tar>
 </target>
