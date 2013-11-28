@@ -58,9 +58,12 @@
 	</tar>
 </target>
 	
+<!-- "catch-deploys" is a bash script in my home directory on my ISP. It takes the bundle.tar file, moves it to the
+	website directory, untars it and removes bundle.tar. -->
+	
 <target name="deploy" depends="bundle">
 	<scp password="${password}" file="${my-host-bundle}/bundle.tar" todir="${my-host-userid}@${desthost}:bundle.tar"/>
-	<sshexec host="${desthost}" username="${my-host-userid}" password="${password}" command="mv bundle.tar web-staging/bundle.tar;cd web-staging;tar xf bundle.tar;cd ..;cp web-staging/* ${my-host-sitepath}/${my-host-userid}/${my-host}.com"/>
+	<sshexec host="${desthost}" username="${my-host-userid}" password="${password}" command="./catch-deploys" />
 </target>
 </project>
 
