@@ -1,0 +1,76 @@
+
+body{ background-color:#b0c4de;}
+
+h1.white-comic-top{
+	font-family:"Comic Sans MS", comic, sans-serif;
+	color:white;
+	text-align:center;
+	}
+	
+h1{
+	font-family:"Comic Sans MS", comic, sans-serif;
+	color:black;
+}
+	
+h1.comic-top{
+        font-family:"Comic Sans MS", comic, sans-serif;
+        color:black;
+		text-align:center;
+        }
+h2{
+        font-family:"Comic Sans MS",comic,sans-serif;
+        color:black;
+        }
+        
+h2.white-comic{
+        font-family:"Comic Sans MS",comic,sans-serif;
+        color:white;
+        }
+        
+h3{
+        font-family:"Comic Sans MS",comic,sans-serif;
+        color:black;
+}
+
+h3.white-comic{
+        font-family:"Comic Sans MS",comic,sans-serif;
+        color:white;
+}
+
+h4{
+        font-family:"Comic Sans MS",comic,sans-serif;
+		color:black;
+	}
+	
+h4.white-comic{
+        font-family:"Comic Sans MS",comic,sans-serif;
+		color:white;
+	}
+	
+		
+p{
+        font:15px geneva, sans-serif;
+        font-family:"Geneva", Geneva, sans-serif;
+		text-align:left
+        }
+        
+
+
+
+body.withlogo{ 
+	background-image:url('./images/katisha.jpg');
+	background-repeat:no-repeat;
+	background-image: left top;
+	background-attachment:fixed;
+	margin-left:100px;
+	}
+
+p.15pt-arial
+{
+font:15px arial,sans-serif;
+}
+
+p.italic-geneva
+{
+font:italic bold 12px/30px Geneva, serif;
+}
